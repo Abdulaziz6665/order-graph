@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useSubscription } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
-import { WAITING, ORDERS, CREATE_WAIT, SUBCR_WAIT, SUBCR_ORDER } from './query'
+import { WAITING_ORDERS, CREATE_WAIT, SUBCR_WAIT, SUBCR_ORDER } from './query'
 
 import './Send.css'
 
@@ -13,8 +13,7 @@ const time = [
 
 function Send() {
   
-  const {data: waits} = useQuery(WAITING)
-  const {data: orders} = useQuery(ORDERS)
+  const {data: waits} = useQuery(WAITING_ORDERS)
 
   const [CreateWaiting] = useMutation(CREATE_WAIT)
 
@@ -22,11 +21,11 @@ function Send() {
   const [order, setOrder] = useState([])
 
   useEffect(() => {
-    if (waits && orders) {
+    if (waits) {
       setWait(waits?.waiting)
-      setOrder(orders.orders)
+      setOrder(waits?.orders)
     }
-  }, [waits,orders])
+  }, [waits])
 
   useSubscription(SUBCR_WAIT, {
     onSubscriptionData: ({ client: { cache }, subscriptionData: { data } }) => {

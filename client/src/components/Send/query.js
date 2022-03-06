@@ -1,5 +1,11 @@
 import { gql } from '@apollo/client'
 
+const WAITING_ORDERS = gql`
+{
+  waiting
+  orders
+}
+`
 const WAITING = gql`
 {
   waiting
@@ -32,6 +38,7 @@ subscription {
 export {
   WAITING,
   ORDERS,
+  WAITING_ORDERS,
   CREATE_WAIT,
   SUBCR_WAIT,
   SUBCR_ORDER

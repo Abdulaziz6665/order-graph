@@ -43,7 +43,15 @@ const wsServer = new WebSocketServer({
   path: '/graphql',
 });
 // Save the returned server's info so we can shutdown this server later
-const serverCleanup = useServer({ schema }, wsServer);
+const serverCleanup = useServer({
+  schema,
+  onConnect: (e) => {
+    console.log('connected')
+  },
+  onDisconnect: (e) => {
+    console.log('disconnected')
+  }
+}, wsServer);
 
 async function start () {
 

@@ -16,6 +16,9 @@ const httpLink = new HttpLink({
 
 const wsLink = new GraphQLWsLink(createClient({
   url: `wss://${window.location.host}/graphql`,
+  connectionParams: {
+    authToken: 'toooooooooooooooooooken'
+  }
 }));
 
 const splitLink = split(
