@@ -45,6 +45,7 @@ const wsServer = new WebSocketServer({
 // Save the returned server's info so we can shutdown this server later
 const serverCleanup = useServer({
   schema,
+  introspection: process.env.NODE_ENV !== 'production',
   onConnect: (e) => {
     console.log('connected')
   },
